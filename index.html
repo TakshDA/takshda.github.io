@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taksh Patel — Data Analyst</title>
+<meta name="description" content="Taksh Patel — Data Analyst. Financial and operational data analysis, dashboards, and reporting automation. Greater Toronto Area." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --teal:#0F4C5C;
+    --teal-deep:#0A3641;
+    --teal-tint:#E4EEF0;
+    --ink:#1A1A1A;
+    --slate:#4A4A4A;
+    --paper:#F7F9F9;
+    --line:#D7E0E1;
+    --ochre:#C0791E;
+    --white:#FFFFFF;
+    --display:"Space Grotesk",system-ui,sans-serif;
+    --body:"Inter",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--teal);color:var(--paper);}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- eyebrow / mono label ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--slate);
+    display:inline-flex;
+    align-items:center;
+    gap:.6em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:9px;height:9px;
+    background:var(--ochre);
+    display:inline-block;
+    transform:rotate(45deg);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,249,249,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease;
+  }
+  header.scrolled{border-bottom:1px solid var(--line);}
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--teal);
+    letter-spacing:-.01em;
+  }
+  .brand span{color:var(--ochre);}
+  .nav-links{display:flex;gap:30px;align-items:center;}
+  .nav-links a{
+    font-family:var(--mono);
+    font-size:.74rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--slate);
+    position:relative;
+    padding:4px 0;
+    transition:color .2s ease;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:-2px;
+    width:0;height:2px;background:var(--ochre);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover,.nav-links a.active{color:var(--teal);}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+  .nav-cta{
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;
+    text-transform:uppercase;
+    border:1px solid var(--teal);color:var(--teal);
+    padding:8px 16px;border-radius:2px;
+    transition:background .2s ease,color .2s ease;
+  }
+  .nav-cta:hover{background:var(--teal);color:var(--paper);}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:.8rem;color:var(--teal);letter-spacing:.1em;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:
+      linear-gradient(180deg,var(--teal) 0%,var(--teal-deep) 100%);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 84px;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse 80% 70% at 70% 30%,#000 0%,transparent 75%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;}
+  .hero .eyebrow{color:rgba(247,249,249,.72);}
+  .hero .eyebrow::before{background:var(--ochre);}
+  .hero h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(2.9rem,7.5vw,5.4rem);
+    line-height:1.02;
+    letter-spacing:-.03em;
+    margin:20px 0 8px;
+  }
+  .hero .role{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.15rem,2.6vw,1.6rem);
+    color:var(--ochre);
+    letter-spacing:-.01em;
+  }
+  .hero .lede{
+    max-width:60ch;
+    margin:24px 0 4px;
+    color:rgba(247,249,249,.86);
+    font-size:1.06rem;
+  }
+  .hero-contact{
+    display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:34px;
+  }
+  .hero-contact a{
+    font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;
+    padding:9px 15px;border-radius:2px;
+    border:1px solid rgba(247,249,249,.32);
+    color:var(--paper);
+    display:inline-flex;align-items:center;gap:8px;
+    transition:background .2s ease,border-color .2s ease;
+  }
+  .hero-contact a:hover{background:rgba(247,249,249,.1);border-color:rgba(247,249,249,.7);}
+  .hero-contact a.primary{background:var(--ochre);border-color:var(--ochre);color:#241300;font-weight:600;}
+  .hero-contact a.primary:hover{background:#d68b2e;}
+
+  .readouts{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1px;background:rgba(247,249,249,.18);
+    border:1px solid rgba(247,249,249,.18);
+    margin-top:46px;border-radius:3px;overflow:hidden;
+  }
+  .readout{background:var(--teal-deep);padding:22px 20px;}
+  .readout .num{
+    font-family:var(--mono);font-weight:600;
+    font-size:clamp(1.7rem,4vw,2.3rem);
+    color:var(--paper);letter-spacing:-.02em;
+  }
+  .readout .lbl{
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(247,249,249,.6);margin-top:6px;
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:82px 0;}
+  section:nth-of-type(even){background:var(--white);}
+  .section-head{margin-bottom:44px;}
+  .section-head h2{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(1.7rem,3.4vw,2.35rem);
+    letter-spacing:-.02em;color:var(--teal);
+    margin-top:14px;
+  }
+  .section-head p{color:var(--slate);max-width:64ch;margin-top:10px;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:52px;align-items:start;}
+  .about-grid p{color:var(--ink);margin-bottom:16px;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .about-aside{
+    border-left:2px solid var(--teal);padding-left:22px;
+  }
+  .about-aside .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:2px;}
+  .about-aside .v{font-weight:500;margin-bottom:18px;}
+  .about-aside .v:last-child{margin-bottom:0;}
+
+  /* ---------- experience timeline ---------- */
+  .timeline{position:relative;padding-left:34px;}
+  .timeline::before{
+    content:"";position:absolute;left:7px;top:6px;bottom:6px;
+    width:2px;background:var(--line);
+  }
+  .job{position:relative;padding-bottom:44px;}
+  .job:last-child{padding-bottom:0;}
+  .job::before{
+    content:"";position:absolute;left:-34px;top:6px;
+    width:16px;height:16px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--teal);
+  }
+  .job.current::before{background:var(--ochre);border-color:var(--ochre);}
+  .job-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline;}
+  .job-title{font-family:var(--display);font-weight:600;font-size:1.22rem;color:var(--ink);letter-spacing:-.01em;}
+  .job-co{color:var(--teal);font-weight:600;}
+  .job-meta{font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;color:var(--slate);white-space:nowrap;}
+  .job-descriptor{font-style:italic;color:var(--slate);margin:4px 0 12px;font-size:.96rem;}
+  .job ul{list-style:none;}
+  .job li{position:relative;padding-left:20px;margin-bottom:8px;color:var(--ink);}
+  .job li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:1.5px;background:var(--ochre);}
+  .tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:2px;}
+  .pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ochre);color:#241300;padding:2px 8px;border-radius:2px;margin-left:8px;vertical-align:middle;font-weight:600;}
+
+  /* ---------- projects ---------- */
+  .project{
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--paper);
+  }
+  .project-head{
+    background:var(--teal);color:var(--paper);padding:26px 30px;
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;
+  }
+  .project-head h3{font-family:var(--display);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;}
+  .project-date{font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;color:rgba(247,249,249,.72);margin-top:5px;}
+  .project-head .plink{
+    font-family:var(--mono);font-size:.76rem;letter-spacing:.05em;
+    border:1px solid rgba(247,249,249,.4);padding:8px 14px;border-radius:2px;
+    display:inline-flex;gap:8px;align-items:center;transition:background .2s ease;
+  }
+  .project-head .plink:hover{background:rgba(247,249,249,.12);}
+  .project-body{padding:28px 30px;}
+  .project-body>p{margin-bottom:20px;}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+  .metric{border-left:2px solid var(--ochre);padding-left:14px;}
+  .metric .m-num{font-family:var(--mono);font-weight:600;font-size:1.5rem;color:var(--teal);letter-spacing:-.02em;}
+  .metric .m-lbl{font-size:.82rem;color:var(--slate);margin-top:2px;}
+  .project-body ul{list-style:none;margin-bottom:22px;}
+  .project-body li{position:relative;padding-left:20px;margin-bottom:8px;}
+  .project-body li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:1.5px;background:var(--ochre);}
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;}
+  .skill-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:24px 26px;}
+  section:nth-of-type(even) .skill-card{background:var(--white);}
+  .skill-card h3{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:14px;}
+  .skill-card .items{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-card .items span{background:var(--teal-tint);color:var(--teal);font-weight:500;font-size:.9rem;padding:6px 13px;border-radius:3px;}
+
+  /* ---------- education & certs ---------- */
+  .ec-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;}
+  .ec-block h3{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:20px;}
+  .edu-item{margin-bottom:22px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-item .deg{font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--ink);}
+  .edu-item .school{color:var(--teal);font-weight:500;}
+  .edu-item .yr{font-family:var(--mono);font-size:.74rem;color:var(--slate);letter-spacing:.04em;}
+  .cert-item{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .cert-item:last-child{border-bottom:0;}
+  .cert-item .name{font-weight:500;}
+  .cert-item .issuer{font-family:var(--mono);font-size:.74rem;color:var(--slate);white-space:nowrap;}
+  .cert-item .prog{color:var(--ochre);}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--teal-deep);color:var(--paper);padding:70px 0 40px;}
+  footer h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.5vw,2.3rem);letter-spacing:-.02em;margin-bottom:8px;}
+  footer p{color:rgba(247,249,249,.78);margin-bottom:26px;max-width:52ch;}
+  .foot-links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:44px;}
+  .foot-links a{
+    font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;
+    border:1px solid rgba(247,249,249,.3);padding:10px 16px;border-radius:2px;
+    display:inline-flex;gap:8px;align-items:center;transition:background .2s ease;
+  }
+  .foot-links a:hover{background:rgba(247,249,249,.1);}
+  .foot-links a.primary{background:var(--ochre);border-color:var(--ochre);color:#241300;font-weight:600;}
+  .foot-bottom{border-top:1px solid rgba(247,249,249,.16);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .foot-bottom span{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(247,249,249,.55);}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:760px){
+    .nav-links,.nav-cta{display:none;}
+    .about-grid,.ec-grid,.skills-grid{grid-template-columns:1fr;gap:30px;}
+    .readouts{grid-template-columns:1fr;}
+    .metrics{grid-template-columns:1fr;}
+    section{padding:60px 0;}
+    .hero{padding:70px 0 60px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    *{transition:none!important;}
+  }
+  :focus-visible{outline:3px solid var(--ochre);outline-offset:3px;border-radius:2px;}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="brand">Taksh Patel<span>.</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Data Analyst · Greater Toronto Area</span>
+    <h1>Taksh Patel</h1>
+    <div class="role">Turning raw data into clear decisions</div>
+    <p class="lede">Three-plus years turning financial and operational data into clean, auditable reporting and dashboards, under payroll and security titles. Now focused full-time on data analysis.</p>
+
+    <div class="hero-contact">
+      <a class="primary" href="mailto:taksh35@gmail.com">✉ taksh35@gmail.com</a>
+      <a href="https://www.linkedin.com/in/takshpatel-780420171" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <a href="https://github.com/TakshDA" target="_blank" rel="noopener">↗ GitHub</a>
+    </div>
+
+    <div class="readouts">
+      <div class="readout"><div class="num">3+ yrs</div><div class="lbl">Data-focused work</div></div>
+      <div class="readout"><div class="num">2,000+</div><div class="lbl">Accounts reconciled</div></div>
+      <div class="readout"><div class="num">5</div><div class="lbl">BI dashboards shipped</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Profile</span>
+      <h2>The through-line is the data</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>My titles have read Payroll Analyst and Security Analyst, but the work underneath has been consistent: reconciling financial data, analyzing operational metrics, automating recurring reporting, and building dashboards that let a team make a decision faster.</p>
+        <p>At MasterCom I owned bi-weekly payroll and account reconciliation across a full workforce. At SpaceA Infotech I moved into operational and security analysis, shipping dashboards and automating the reports behind them. Alongside that I keep a live analytics project running to sharpen the modelling and BI side of the craft.</p>
+        <p>I work in SQL, Python, Power BI, and Advanced Excel, and I care about work being accurate, repeatable, and honest about what the numbers actually say.</p>
+      </div>
+      <aside class="about-aside">
+        <div class="k">Location</div><div class="v">Greater Toronto Area</div>
+        <div class="k">Focus</div><div class="v">Data Analyst &amp; data-adjacent roles</div>
+        <div class="k">Core stack</div><div class="v">SQL · Python · Power BI · Excel</div>
+        <div class="k">Email</div><div class="v"><a href="mailto:taksh35@gmail.com" style="color:var(--teal)">taksh35@gmail.com</a></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Career</span>
+      <h2>Experience in full</h2>
+      <p>Every role, including the ones a one-page resume forces me to cut. The analytical thread runs through all of them.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="job current reveal">
+        <div class="job-top">
+          <div class="job-title">Casino Dealer <span class="pill">Part-time · concurrent</span></div>
+          <div class="job-meta">Jun 2023 — Present</div>
+        </div>
+        <div class="job-co">Great Canadian Entertainment</div>
+        <ul>
+          <li>Operate multiple table games on a high-volume, regulated gaming floor, handling live cash and chip transactions with exact accuracy at every step of play.</li>
+          <li>Apply AML and FINTRAC compliance procedures on every transaction, including recognizing and escalating reportable activity within a tightly regulated financial environment.</li>
+          <li>Maintain game integrity and a steady pace under continuous pressure while keeping guests engaged and resolving disputes calmly and professionally.</li>
+          <li>Work rotating and on-call shifts, demonstrating reliability and scheduling flexibility while holding this role concurrently with my analytical work.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Regulated finance</span><span class="tag">AML / FINTRAC</span><span class="tag">Customer service</span></div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-top">
+          <div class="job-title">Security Analyst</div>
+          <div class="job-meta">Jan 2025 — Mar 2026</div>
+        </div>
+        <div class="job-co">SpaceA Infotech</div>
+        <div class="job-descriptor">Operational Data Analysis, Dashboards &amp; Reporting Automation</div>
+        <ul>
+          <li>Designed and built roughly five Power BI dashboards and reports that consolidated operational and security data into single, at-a-glance views for faster team review and decision-making.</li>
+          <li>Automated recurring reporting workflows, converting manual, repetitive data pulls into scheduled, repeatable outputs and cutting the hands-on effort required each cycle.</li>
+          <li>Collected, cleaned, and transformed operational data from multiple sources using Power Query and Excel before modelling it in Power BI.</li>
+          <li>Analyzed operational and security metrics to surface trends, flag anomalies, and give the team an early read on issues before they escalated.</li>
+          <li>Structured and documented the reporting so outputs stayed consistent and could be re-run or handed off without rework.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Power BI</span><span class="tag">Reporting automation</span><span class="tag">Operational analytics</span></div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-top">
+          <div class="job-title">Payroll Analyst</div>
+          <div class="job-meta">Nov 2022 — Dec 2024</div>
+        </div>
+        <div class="job-co">MasterCom</div>
+        <div class="job-descriptor">Financial Data Analysis, Reconciliation &amp; Reporting</div>
+        <ul>
+          <li>Owned end-to-end bi-weekly payroll for a 32-person workforce across roughly 52 pay cycles, delivering every run with zero missed pay dates.</li>
+          <li>Reconciled 2,000+ accounts each cycle, investigating variances line by line and correcting data discrepancies before final sign-off.</li>
+          <li>Built and maintained recurring Excel reports and reconciliation workbooks using advanced formulas and pivot tables, turning raw payroll and financial data into clean, auditable summaries.</li>
+          <li>Validated large volumes of financial data for accuracy and completeness, keeping every cycle compliant and audit-ready.</li>
+          <li>Handled sensitive financial and employee data with strict confidentiality and precision throughout.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Advanced Excel</span><span class="tag">Reconciliation</span><span class="tag">Financial reporting</span></div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-top">
+          <div class="job-title">IT Support Specialist</div>
+        </div>
+        <div class="job-co">BISAG-N</div>
+        <ul>
+          <li>Provided first-line technical support and helpdesk troubleshooting for hardware, software, and connectivity issues across multi-site systems.</li>
+          <li>Managed tickets through their full lifecycle, logging, prioritizing, and resolving issues to keep users operational with minimal downtime.</li>
+          <li>Coordinated with technicians and other teams to escalate and resolve more complex problems efficiently.</li>
+          <li>Documented recurring issues and their fixes to speed up resolution for future cases.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">IT support</span><span class="tag">Ticketing / helpdesk</span><span class="tag">Multi-site systems</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Projects</h2>
+      <p>Where I stretch the modelling and BI side of the work in public.</p>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-head">
+        <div>
+          <h3>Premier League Predictor</h3>
+          <div class="project-date">May 2026 — Jul 2026</div>
+        </div>
+        <a class="plink" href="https://github.com/TakshDA/football-predictor" target="_blank" rel="noopener">↗ View on GitHub</a>
+      </div>
+      <div class="project-body">
+        <p>An end-to-end machine learning project that predicts Premier League match outcomes and individual player performance, built from raw historical data all the way through to an interactive Power BI dashboard. It runs the complete analyst workflow start to finish: sourcing and cleaning the data, engineering features, training and validating models, storing results in a SQL database, and visualizing everything for a non-technical audience.</p>
+
+        <div class="metrics">
+          <div class="metric"><div class="m-num">49.5%</div><div class="m-lbl">Match accuracy vs 42.6% baseline</div></div>
+          <div class="metric"><div class="m-num">17.9%</div><div class="m-lbl">Player model gain over baseline</div></div>
+          <div class="metric"><div class="m-num">3,398</div><div class="m-lbl">Matches across 11 seasons</div></div>
+        </div>
+
+        <ul>
+          <li>Collected and cleaned 3,398 matches spanning 11 Premier League seasons, standardizing messy raw data into a single, consistent, model-ready dataset.</li>
+          <li>Engineered team-strength features using an ELO rating system that updates after every match, capturing form and relative strength as it changes over time.</li>
+          <li>Trained a scikit-learn match-outcome model that reached 49.5% accuracy, beating the naive home-win baseline of 42.6%.</li>
+          <li>Built a separate player-level model with Ridge regression (predict_players.py) to project individual performance, outperforming a persistence baseline by 17.9%.</li>
+          <li>Created a SQL layer with a SQLite database (build_database.py) and a set of analysis queries (run_queries.py) to store predictions and run structured analysis on the results.</li>
+          <li>Surfaced an analytical finding during exploration: home advantage declined from 48.4% to 42.6% across the seasons studied.</li>
+          <li>Delivered the results in an interactive Power BI dashboard featuring an accuracy callout, ELO team rankings, player projections, and a full match-prediction table.</li>
+          <li>Published the complete project with a documented README on GitHub and wrote it up on LinkedIn for a technical audience.</li>
+        </ul>
+
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span>
+          <span class="tag">ELO ratings</span><span class="tag">SQL / SQLite</span><span class="tag">Power BI</span><span class="tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Toolkit</span>
+      <h2>Skills</h2>
+      <p>Tools I actually use, not a wishlist.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <h3>Query &amp; Languages</h3>
+        <div class="items"><span>SQL</span><span>Python</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span></div>
+      </div>
+      <div class="skill-card">
+        <h3>BI &amp; Visualization</h3>
+        <div class="items"><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Advanced Excel</span><span>PowerPoint</span></div>
+      </div>
+      <div class="skill-card">
+        <h3>Data Work</h3>
+        <div class="items"><span>Reconciliation</span><span>Reporting automation</span><span>Dashboarding</span><span>Data cleaning</span></div>
+      </div>
+      <div class="skill-card">
+        <h3>Tools &amp; Workflow</h3>
+        <div class="items"><span>Git / GitHub</span><span>SQLite</span><span>AI / LLM tools</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTIFICATIONS -->
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Credentials</span>
+      <h2>Education &amp; Certifications</h2>
+    </div>
+    <div class="ec-grid reveal">
+      <div class="ec-block">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div class="deg">Master of Informatics — Cloud Computing</div>
+          <div class="school">Northeastern University</div>
+          <div class="yr">Apr 2024</div>
+        </div>
+        <div class="edu-item">
+          <div class="deg">B.Tech, Information Technology</div>
+          <div class="school">CHARUSAT University</div>
+          <div class="yr">Apr 2022</div>
+        </div>
+      </div>
+      <div class="ec-block">
+        <h3>Certifications</h3>
+        <div class="cert-item"><span class="name">SQL</span><span class="issuer">Mode Analytics</span></div>
+        <div class="cert-item"><span class="name">Power BI + Advanced Excel</span><span class="issuer">Microsoft Learn</span></div>
+        <div class="cert-item"><span class="name">Python</span><span class="issuer">Kaggle</span></div>
+        <div class="cert-item"><span class="name">Data Analytics Essentials <span class="prog">· in progress</span></span><span class="issuer">Cisco</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="color:rgba(247,249,249,.7)">Get in touch</span>
+    <h2 style="margin-top:14px">Let's talk data.</h2>
+    <p>Open to Data Analyst and data-adjacent roles across the Greater Toronto Area and remote. The fastest way to reach me is email.</p>
+    <div class="foot-links">
+      <a class="primary" href="mailto:taksh35@gmail.com">✉ taksh35@gmail.com</a>
+      <a href="https://www.linkedin.com/in/takshpatel-780420171" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <a href="https://github.com/TakshDA" target="_blank" rel="noopener">↗ GitHub</a>
+    </div>
+    <div class="foot-bottom">
+      <span>Taksh Patel — Data Analyst</span>
+      <span>Greater Toronto Area</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky header border
+  const header=document.querySelector('header');
+  const onScroll=()=>{header.classList.toggle('scrolled',window.scrollY>10);};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // scroll reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // active nav link
+  const sections=[...document.querySelectorAll('section[id]')];
+  const links=[...document.querySelectorAll('.nav-links a')];
+  const spy=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id;
+        links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>
