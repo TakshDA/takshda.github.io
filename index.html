@@ -250,6 +250,9 @@
   .project-head .plink:hover{background:rgba(247,249,249,.12);}
   .project-body{padding:28px 30px;}
   .project-body>p{margin-bottom:20px;}
+  .project-shot-wrap{margin:0 0 24px;}
+  .project-shot{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:6px;}
+  .project-shot-wrap figcaption{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--slate);margin-top:9px;text-align:center;}
   .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
   .metric{border-left:2px solid var(--ochre);padding-left:14px;}
   .metric .m-num{font-family:var(--mono);font-weight:600;font-size:1.5rem;color:var(--teal);letter-spacing:-.02em;}
@@ -470,6 +473,11 @@
       </div>
       <div class="project-body">
         <p>An end-to-end machine learning project that predicts Premier League match outcomes and individual player performance, built from raw historical data all the way through to an interactive Power BI dashboard. It runs the complete analyst workflow start to finish: sourcing and cleaning the data, engineering features, training and validating models, storing results in a SQL database, and visualizing everything for a non-technical audience.</p>
+
+        <figure class="project-shot-wrap">
+          <img class="project-shot" src="dashboard.png" alt="Premier League Predictor Power BI dashboard showing an accuracy callout, ELO team rankings, player projections, and a match-prediction table." loading="lazy" />
+          <figcaption>Power BI dashboard — accuracy callout, ELO rankings, player projections, and match-prediction table.</figcaption>
+        </figure>
 
         <div class="metrics">
           <div class="metric"><div class="m-num">49.5%</div><div class="m-lbl">Match accuracy vs 42.6% baseline</div></div>
